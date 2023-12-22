@@ -1,13 +1,10 @@
 $(document).ready(function () {
     const COLOR_LIST = [
-        '#11235A',
         '#756AB6',
-        '#A1EEBD',
         '#FF9800',
         '#3559E0',
         '#E26EE5',
         '#7E30E1',
-        '#EF4040',
         '#C21292',
         '#65B741',
         '#FFB534',
@@ -19,14 +16,10 @@ $(document).ready(function () {
         '#C683D7',
         '#ED9ED6',
         '#FFC7C7',
-        '#2B3499',
         '#FF6C22',
         '#FF9209',
-        '#FFD099',
-        '#0C356A',
         '#0174BE',
         '#FFC436',
-        '#FFF0CE',
         '#00A9FF',
         '#3D30A2',
         '#F875AA'
@@ -50,7 +43,6 @@ $(document).ready(function () {
         try {
             const response = await fetch('https://api.quotable.io/random');
             const json_quote = await response.json()
-            console.log(json_quote)
             setQuoteText(json_quote.content)
             setAuthorName(json_quote.author)
         } catch (error) {
