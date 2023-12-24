@@ -26,6 +26,7 @@ $(document).ready(function () {
     ];
 
     $("#new-quote").click(function() {
+        hideThePlaceholders()
         getQuoteFromAPI()
         changeColor()
     })
@@ -37,17 +38,38 @@ $(document).ready(function () {
         $("#author").css('color', COLOR_LIST[randomIndex])
         $("#github-link").css('background-color', COLOR_LIST[randomIndex])
         $("#new-quote").css('background-color', COLOR_LIST[randomIndex])
+        $(".placeholder").css('color', COLOR_LIST[randomIndex])
     }
 
     async function getQuoteFromAPI() {
+        showThePlaceholders()
+        hideTheQuoteAndAuthor()
         try {
             const response = await fetch('https://api.quotable.io/random');
             const json_quote = await response.json()
             setQuoteText(json_quote.content)
             setAuthorName(json_quote.author)
+            hideThePlaceholders()
+            showTheQuoteAndAuthor()
         } catch (error) {
             console.log(error)
         }
+    }
+
+    function showThePlaceholders() {
+        $("#placeholder-block").show();
+    }
+
+    function showTheQuoteAndAuthor() {
+        $("#quote-block").show();
+    }
+
+    function hideThePlaceholders() {
+        $("#placeholder-block").hide();
+    }
+
+    function hideTheQuoteAndAuthor() {
+        $("#quote-block").hide();
     }
 
     function getRandomInt(max) {
@@ -63,6 +85,7 @@ $(document).ready(function () {
         $("#quote").html(text)
     }
 
-    getQuoteFromAPI()
     changeColor()
+    hideTheQuoteAndAuthor()
+    getQuoteFromAPI()
 })
